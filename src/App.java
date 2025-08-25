@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class App {
     public static void main(String[] args) throws Exception {
         int[] a = new int[] { 49, 27, 32, 18, 1, 11, 22, 44 };
-        System.out.println(Arrays.toString(insertionsort(a)));
+        System.out.println(Arrays.toString(mergesort(a)));
     }
 
     public static int[] bubblesort(int[] a) {
@@ -51,6 +51,44 @@ public class App {
             a[j+1]=org;
         }
         return a;
+    }
+
+    public static int[] mergesort(int[] a){
+        if(a.length<=1){
+            return a;
+        }
+        int middle = a.length/2;
+        int[] left = new int[middle];
+        int[] right = new int[a.length-middle];
+        for(int i=0; i<middle; i++){
+            left[i]=a[i];
+        }
+        for(int i=middle; i<a.length; i++){
+            right[i-middle]=a[i];
+        }
+
+        left = mergesort(left);
+        right=mergesort(right);
+
+        int[] results = new int[a.length];
+        int i=0;
+        int j=0;
+        int m=0;
+        while(i<left.length && j<right.length){
+            if(left[i]<=right[j]){
+                results[m++] = left[i++];
+            }
+            else{
+                results[m++] = right[j++];
+            }
+        }
+        while(i<left.length){
+            results[m++] = left[i++];
+        }
+        while(j<right.length){
+            results[m++] = right[j++];
+        }
+        return results;
     }
 
 }

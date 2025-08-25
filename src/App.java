@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class App {
     public static void main(String[] args) throws Exception {
         int[] a = new int[] { 49, 27, 32, 18, 1, 11, 22, 44 };
-        System.out.println(Arrays.toString(selectionsort(a)));
+        System.out.println(Arrays.toString(insertionsort(a)));
     }
 
     public static int[] bubblesort(int[] a) {
@@ -41,10 +41,16 @@ public class App {
     }
 
     public static int[] insertionsort(int[] a){
-        
+        for(int i=1; i<a.length; i++){
+            int org = a[i];
+            int j=i-1;
+            while(j>=0 && a[j] >org){
+                a[j+1]=a[j];
+                j--;
+            }
+            a[j+1]=org;
+        }
         return a;
-
-        
     }
 
 }
